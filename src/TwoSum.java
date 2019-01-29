@@ -10,7 +10,7 @@ public class TwoSum {
     public static void main(String[] args) {
         int[] nums = new int[]{3, 3};
         int target = 6;
-        int[] indexes = cleverWay(nums, target);
+        int[] indexes = fastestWay(nums, target);
         Arrays.sort(indexes);
         StringBuilder result = new StringBuilder();
         result.append("Array‘s indexes are ");
@@ -59,9 +59,21 @@ public class TwoSum {
         return indexes;
     }
 
-    private static int[] fasterWay(int[] nums, int target) {
+    private static int[] fastestWay(int[] nums, int target) {
+        Map<Integer, Integer> map = new HashMap();
+        int[] indexes = new int[2];
+        int index;
+        for (int i = 0; i < nums.length; i++) {
+            index = target - nums[i];
+            // prevent from the case , such as [3, 3]
+            if (map.containsKey(index) && map.get(index) != i) {
+                indexes[0] = i;
+                indexes[1] = map.get(index);
+                break;
+            }
+            map.put(nums[i], i);
+        }
 
-
-        return null;
+        return indexes;
     }
 }
