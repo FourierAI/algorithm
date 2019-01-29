@@ -2,11 +2,14 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author geekye.ye
+ */
 public class TwoSum {
 
     public static void main(String[] args) {
-        int[] nums = new int[]{1, 2, 3, 4, 5, 6};
-        int target = 8;
+        int[] nums = new int[]{3, 3};
+        int target = 6;
         int[] indexes = cleverWay(nums, target);
         Arrays.sort(indexes);
         StringBuilder result = new StringBuilder();
@@ -43,14 +46,22 @@ public class TwoSum {
             map.put(nums[i], i);
         }
 
-        for (Integer key : map.keySet()
-                ) {
-            if (map.get(target - map.get(key)) != null) {
-                indexes[0] = map.get(key);
-                indexes[1] = map.get(target - key);
+        for (int i = 0; i < nums.length; i++) {
+            int index = target - nums[i];
+            // prevent from the case , such as [3, 3]
+            if (map.containsKey(index) && map.get(index) != i) {
+                indexes[0] = i;
+                indexes[1] = map.get(index);
+                break;
             }
         }
 
         return indexes;
+    }
+
+    private static int[] fasterWay(int[] nums, int target) {
+
+
+        return null;
     }
 }
