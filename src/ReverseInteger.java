@@ -7,15 +7,15 @@
 public class ReverseInteger {
 
     public static void main(String[] args) {
-        int x = 1534236469;
+        int x = 153623;
         System.out.println("num before be reversed is " + x + ".");
         System.out.println("num after be reversed is " + reverse(x) + ".");
     }
 
 
     /**
-     *
-     *
+     * use String`s .toCharArray() function to solve this question
+     * for example 153623 -> 326351
      */
     private static int reverse(int x) {
 
@@ -44,7 +44,7 @@ public class ReverseInteger {
 
         }
 
-        if(Long.parseLong(result.toString()) > Integer.MAX_VALUE || Long.parseLong(result.toString()) < Integer.MIN_VALUE){
+        if (Long.parseLong(result.toString()) > Integer.MAX_VALUE || Long.parseLong(result.toString()) < Integer.MIN_VALUE) {
             return 0;
         }
 
