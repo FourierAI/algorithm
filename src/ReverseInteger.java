@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * @program: algorithm
  * @description: 反转数字
@@ -9,7 +13,7 @@ public class ReverseInteger {
     public static void main(String[] args) {
         int x = 153623;
         System.out.println("num before be reversed is " + x + ".");
-        System.out.println("num after be reversed is " + reverse(x) + ".");
+        System.out.println("num after be reversed is " + fastestWay(x) + ".");
     }
 
 
@@ -49,5 +53,35 @@ public class ReverseInteger {
         }
 
         return Integer.parseInt(result.toString());
+    }
+
+
+    /**
+     * use / and % to solve this question
+     * and I also use Lambda to map reduce those data
+     */
+    private static int fastestWay(int x) {
+
+        if (x >= Integer.MAX_VALUE) {
+            return 0;
+        }
+
+        List<Integer> list = new ArrayList<>();
+        while ((x < 0 && x > -10) || (x < 10 && x > 0) || (x / 10 != 0)) {
+            int remainder = x % 10;
+            list.add(remainder);
+            x = (x / 10);
+            if (x == 0) {
+                break;
+            }
+            list = list.stream().map(r -> r * 10).collect(Collectors.toList());
+        }
+
+        long result = list.stream().mapToInt(p -> p.intValue()).sum();
+        if (result >= Integer.MAX_VALUE) {
+            return 0;
+        } else {
+            return (int) result;
+        }
     }
 }
