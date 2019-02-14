@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -13,33 +12,38 @@ public class EightQueen {
 
     public static void main(String[] args) {
 
-        List<Integer> eightQueen = Arrays.asList(0);
-        List<Integer> copy = new ArrayList<>();
-        Collections.copy(eightQueen, copy);
-        eightQueen = getEightQueen(copy);
-        System.out.println(eightQueen);
+        List<long[]> matrix = getEightQueen();
+
     }
 
-    private static List<Integer> getEightQueen(List<Integer> a) {
-
-        for (int i = 0; i < 8 || a.size() < 8; i++) {
-            if (checkNum(a, i)) {
-                a.add(i);
+    private static List<long[]> getEightQueen() {
+        List<long[]> matrix = new ArrayList<>();
+        for (int i = 0; i <= 99999999; i++) {
+            long [] a = new long [8];
+            String str = String.valueOf(i);
+            char[] chars = str.toCharArray();
+            for (int j = 0; j < chars.length ; j++) {
+                a[j] = Long.parseLong(String.valueOf(chars[j]));
             }
-            if(i == 8){
-                i = 0;
-            }
+            System.out.println(Arrays.toString(a));
+            matrix.add(a);
         }
-        return a;
+        return matrix;
     }
 
     private static boolean checkNum(List<Integer> a, int num) {
+        //判断同一行
         if (a.contains(num)) {
             return false;
         }
-        if (a.contains(num + 1) || a.contains(num - 1)) {
-            return false;
+
+        //判断对角线
+        for (int i = 1; i <= a.size(); i++) {
+            if ((a.get(a.size() - i) + i == num) || (a.get(a.size() - i) - i == num)) {
+                return false;
+            }
         }
+
         return true;
     }
 
